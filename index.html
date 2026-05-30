@@ -20,7 +20,22 @@
     }
 
     .class-card {
+      min-width: 0;
+      max-width: 100%;
       transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .class-card,
+    .class-card * {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
+    }
+
+    .class-name {
+      display: block;
+      max-width: 100%;
+      line-height: 1.25;
     }
 
     .class-card:hover,
@@ -40,9 +55,9 @@
   </style>
 </head>
 <body class="min-h-screen text-stone-100">
-  <main class="survival-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+  <main id="appRoot" class="survival-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
     <section class="mx-auto max-w-7xl">
-      <header class="mb-6 border-b border-stone-700/70 pb-5">
+      <header class="mb-6 border-b border-stone-700/70 pb-5" data-selection-safe>
         <p class="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-lime-400">Data Structures Assignment 2</p>
         <h1 class="max-w-5xl text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
           Monster Scraper OOP Inheritance &amp; Polymorphism Visualizer
@@ -71,9 +86,9 @@
 
           <div class="grid gap-5 lg:grid-cols-[1fr_0.72fr]">
             <article>
-              <h3 class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-stone-400">Character Hierarchy</h3>
+              <h3 class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-stone-400" data-selection-safe>Character Hierarchy</h3>
 
-              <div class="mx-auto max-w-sm">
+              <div class="mx-auto max-w-sm" data-selection-safe>
                 <div class="class-card rounded-lg border border-sky-700/70 bg-sky-950/45 p-4">
                   <div class="text-xs font-bold uppercase tracking-[0.18em] text-sky-300">Abstract Class</div>
                   <div class="mt-1 text-lg font-black">CharacterADT</div>
@@ -90,7 +105,7 @@
               <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="Player" type="button">
                   <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
-                  <span class="mt-1 block text-lg font-black">Player</span>
+                  <span class="class-name mt-1 text-lg font-black">Player</span>
                   <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; Player</span>
                   <span class="mt-2 block font-mono text-xs text-stone-300">inventory, item_data, weapon, scrap</span>
                   <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
@@ -98,7 +113,7 @@
 
                 <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="NormalMonster" type="button">
                   <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
-                  <span class="mt-1 block text-lg font-black">NormalMonster</span>
+                  <span class="class-name mt-1 text-lg font-black">NormalMonster</span>
                   <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; NormalMonster</span>
                   <span class="mt-2 block font-mono text-xs text-stone-300">reward = 10</span>
                   <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
@@ -106,7 +121,7 @@
 
                 <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="EliteMonster" type="button">
                   <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
-                  <span class="mt-1 block text-lg font-black">EliteMonster</span>
+                  <span class="class-name mt-1 text-lg font-black">EliteMonster</span>
                   <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; EliteMonster</span>
                   <span class="mt-2 block font-mono text-xs text-stone-300">reward = 20</span>
                   <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
@@ -114,7 +129,7 @@
 
                 <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="BossMonster" type="button">
                   <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
-                  <span class="mt-1 block text-lg font-black">BossMonster</span>
+                  <span class="class-name mt-1 text-lg font-black">BossMonster</span>
                   <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; BossMonster</span>
                   <span class="mt-2 block font-mono text-xs text-stone-300">reward = 35</span>
                   <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
@@ -122,7 +137,7 @@
 
                 <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left sm:col-span-2 xl:col-span-1" data-class="TrainingDummy" type="button">
                   <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
-                  <span class="mt-1 block text-lg font-black">TrainingDummy</span>
+                  <span class="class-name mt-1 text-lg font-black">TrainingDummy</span>
                   <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; TrainingDummy</span>
                   <span class="mt-2 block font-mono text-xs text-stone-300">practice target</span>
                   <span class="mt-3 block text-xs text-stone-400">Overrides attack and take_damage</span>
@@ -131,7 +146,7 @@
             </article>
 
             <div class="grid gap-5">
-              <article>
+              <article data-selection-safe>
                 <h3 class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-stone-400">Item Hierarchy</h3>
                 <div class="grid gap-3">
                   <div class="class-card rounded-lg border border-cyan-700/70 bg-cyan-950/35 p-4">
@@ -156,7 +171,7 @@
                 </div>
               </article>
 
-              <article class="rounded-lg border border-rose-800/80 bg-rose-950/20 p-4">
+              <article class="rounded-lg border border-rose-800/80 bg-rose-950/20 p-4" data-selection-safe>
                 <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-rose-300">Game Class</h3>
                 <div class="mt-2 text-lg font-black text-white">Game</div>
                 <p class="mt-2 text-sm leading-6 text-stone-300">
@@ -169,7 +184,7 @@
         </section>
 
         <aside class="grid gap-6">
-          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5">
+          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5" data-selection-safe>
             <div class="mb-3 flex items-center justify-between gap-3">
               <div>
                 <h2 class="text-xl font-bold text-white">Training Dummy</h2>
@@ -185,7 +200,7 @@
             </div>
           </section>
 
-          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5">
+          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5" data-selection-safe>
             <h2 class="text-xl font-bold text-white">Method Call Result</h2>
             <div class="mt-4 grid gap-3 text-sm">
               <div class="rounded border border-stone-800 bg-stone-950 p-3">
@@ -207,7 +222,7 @@
             </div>
           </section>
 
-          <section class="rounded-lg border border-lime-800/70 bg-lime-950/15 p-4 shadow-2xl shadow-black/30 sm:p-5">
+          <section class="rounded-lg border border-lime-800/70 bg-lime-950/15 p-4 shadow-2xl shadow-black/30 sm:p-5" data-selection-safe>
             <h2 class="text-xl font-bold text-white">Why This Is Polymorphism</h2>
             <p class="mt-3 text-sm leading-6 text-stone-300">
               Every clickable object is treated as a Character, but each subclass responds to the same
@@ -216,7 +231,7 @@
             </p>
           </section>
 
-          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5">
+          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5" data-selection-safe>
             <h2 class="text-xl font-bold text-white">Click Log</h2>
             <ol id="clickLog" class="mt-4 max-h-56 space-y-2 overflow-auto pr-1 text-sm text-stone-300"></ol>
           </section>
@@ -415,6 +430,7 @@
     const clickLog = document.querySelector("#clickLog");
     const cards = document.querySelectorAll(".interactive-card");
     const resetButton = document.querySelector("#resetButton");
+    const appRoot = document.querySelector("#appRoot");
     let logCount = 0;
 
     function updateDummyHp() {
@@ -437,6 +453,13 @@
       cards.forEach((card) => {
         card.classList.toggle("active", card.dataset.class === className);
       });
+    }
+
+    function clearActiveSelection() {
+      setActiveCard("");
+      selectedClass.textContent = "None";
+      calledMethod.textContent = "None";
+      resultMessage.textContent = "No class selected. Click a subclass card to run attack(target).";
     }
 
     // This click handler is the polymorphism demo.
@@ -465,7 +488,16 @@
       calledMethod.textContent = "Game.resetDummy()";
       resultMessage.textContent = "Training Dummy HP was reset to 999.";
       updateDummyHp();
-      setActiveCard("");
+    });
+
+    appRoot.addEventListener("click", (event) => {
+      const clickedProtectedArea = event.target.closest(
+        ".interactive-card, #resetButton, [data-selection-safe]"
+      );
+
+      if (!clickedProtectedArea) {
+        clearActiveSelection();
+      }
     });
 
     updateDummyHp();
