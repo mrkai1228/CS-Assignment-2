@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monster Scraper OOP Inheritance & Polymorphism Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(132, 204, 22, 0.14), transparent 28rem),
+        linear-gradient(135deg, #0d1117 0%, #15110f 48%, #09090b 100%);
+    }
+
+    .survival-grid {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .class-card {
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .class-card:hover,
+    .class-card.active {
+      transform: translateY(-2px);
+      border-color: rgb(132 204 22);
+      box-shadow: 0 0 0 1px rgba(132, 204, 22, 0.35), 0 18px 45px rgba(0, 0, 0, 0.35);
+      background: rgba(39, 39, 42, 0.96);
+    }
+
+    .connector {
+      width: 2px;
+      height: 28px;
+      background: linear-gradient(to bottom, rgba(132, 204, 22, 0.8), rgba(120, 113, 108, 0.25));
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-stone-100">
+  <main class="survival-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl">
+      <header class="mb-6 border-b border-stone-700/70 pb-5">
+        <p class="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-lime-400">Data Structures Assignment 2</p>
+        <h1 class="max-w-5xl text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
+          Monster Scraper OOP Inheritance &amp; Polymorphism Visualizer
+        </h1>
+        <p class="mt-3 max-w-3xl text-sm leading-6 text-stone-300 sm:text-base">
+          Python console game architecture rebuilt as JavaScript classes. Click a subclass to call its overridden
+          <span class="font-mono text-lime-300">attack(target)</span> method against the Training Dummy.
+        </p>
+      </header>
+
+      <div class="grid gap-6 xl:grid-cols-[1.35fr_0.9fr]">
+        <section>
+          <div class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white">UML Inheritance Map</h2>
+              <p class="mt-1 text-sm text-stone-400">Cards marked as interactive execute polymorphic behavior.</p>
+            </div>
+            <button
+              id="resetButton"
+              class="w-full rounded border border-lime-500/70 bg-lime-500/10 px-4 py-2 text-sm font-bold text-lime-200 transition hover:bg-lime-500/20 sm:w-auto"
+              type="button"
+            >
+              Reset Dummy HP
+            </button>
+          </div>
+
+          <div class="grid gap-5 lg:grid-cols-[1fr_0.72fr]">
+            <article>
+              <h3 class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-stone-400">Character Hierarchy</h3>
+
+              <div class="mx-auto max-w-sm">
+                <div class="class-card rounded-lg border border-sky-700/70 bg-sky-950/45 p-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.18em] text-sky-300">Abstract Class</div>
+                  <div class="mt-1 text-lg font-black">CharacterADT</div>
+                  <div class="mt-2 font-mono text-xs text-stone-300">name, hp, attack(target), take_damage(damage)</div>
+                </div>
+                <div class="connector"></div>
+                <div class="class-card rounded-lg border border-amber-700/70 bg-amber-950/35 p-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.18em] text-amber-300">Base Class</div>
+                  <div class="mt-1 text-lg font-black">Character</div>
+                  <div class="mt-2 font-mono text-xs text-stone-300">max_hp, attack_power, heal(amount), is_alive()</div>
+                </div>
+              </div>
+
+              <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="Player" type="button">
+                  <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
+                  <span class="mt-1 block text-lg font-black">Player</span>
+                  <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; Player</span>
+                  <span class="mt-2 block font-mono text-xs text-stone-300">inventory, item_data, weapon, scrap</span>
+                  <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
+                </button>
+
+                <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="NormalMonster" type="button">
+                  <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
+                  <span class="mt-1 block text-lg font-black">NormalMonster</span>
+                  <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; NormalMonster</span>
+                  <span class="mt-2 block font-mono text-xs text-stone-300">reward = 10</span>
+                  <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
+                </button>
+
+                <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="EliteMonster" type="button">
+                  <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
+                  <span class="mt-1 block text-lg font-black">EliteMonster</span>
+                  <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; EliteMonster</span>
+                  <span class="mt-2 block font-mono text-xs text-stone-300">reward = 20</span>
+                  <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
+                </button>
+
+                <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left" data-class="BossMonster" type="button">
+                  <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
+                  <span class="mt-1 block text-lg font-black">BossMonster</span>
+                  <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; BossMonster</span>
+                  <span class="mt-2 block font-mono text-xs text-stone-300">reward = 35</span>
+                  <span class="mt-3 block text-xs text-stone-400">Overrides attack(target)</span>
+                </button>
+
+                <button class="class-card interactive-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4 text-left sm:col-span-2 xl:col-span-1" data-class="TrainingDummy" type="button">
+                  <span class="block text-xs font-bold uppercase tracking-[0.16em] text-lime-300">Subclass</span>
+                  <span class="mt-1 block text-lg font-black">TrainingDummy</span>
+                  <span class="mt-2 block font-mono text-[11px] leading-5 text-amber-200">CharacterADT -&gt; Character -&gt; TrainingDummy</span>
+                  <span class="mt-2 block font-mono text-xs text-stone-300">practice target</span>
+                  <span class="mt-3 block text-xs text-stone-400">Overrides attack and take_damage</span>
+                </button>
+              </div>
+            </article>
+
+            <div class="grid gap-5">
+              <article>
+                <h3 class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-stone-400">Item Hierarchy</h3>
+                <div class="grid gap-3">
+                  <div class="class-card rounded-lg border border-cyan-700/70 bg-cyan-950/35 p-4">
+                    <div class="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">Base Class</div>
+                    <div class="mt-1 text-lg font-black">Item</div>
+                    <div class="mt-2 font-mono text-xs text-stone-300">name</div>
+                  </div>
+                  <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                    <div class="class-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4">
+                      <div class="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">Item Subclass</div>
+                      <div class="mt-1 text-lg font-black">Weapon</div>
+                      <div class="mt-2 font-mono text-[11px] leading-5 text-cyan-100">Item -&gt; Weapon</div>
+                      <div class="mt-2 font-mono text-xs text-stone-300">bonus_attack</div>
+                    </div>
+                    <div class="class-card rounded-lg border border-stone-700 bg-zinc-900/90 p-4">
+                      <div class="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">Item Subclass</div>
+                      <div class="mt-1 text-lg font-black">HealingItem</div>
+                      <div class="mt-2 font-mono text-[11px] leading-5 text-cyan-100">Item -&gt; HealingItem</div>
+                      <div class="mt-2 font-mono text-xs text-stone-300">heal_amount</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-lg border border-rose-800/80 bg-rose-950/20 p-4">
+                <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-rose-300">Game Class</h3>
+                <div class="mt-2 text-lg font-black text-white">Game</div>
+                <p class="mt-2 text-sm leading-6 text-stone-300">
+                  Manages the Player, creates Monster instances, creates Item instances, and controls battle, safe zone,
+                  shop, and other game flow features.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <aside class="grid gap-6">
+          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5">
+            <div class="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h2 class="text-xl font-bold text-white">Training Dummy</h2>
+                <p class="text-sm text-stone-400">Target object receiving attacks</p>
+              </div>
+              <div class="rounded border border-stone-700 px-3 py-2 text-right">
+                <div class="text-xs uppercase tracking-[0.16em] text-stone-400">HP</div>
+                <div id="dummyHpText" class="font-mono text-lg font-black text-lime-300">999 / 999</div>
+              </div>
+            </div>
+            <div class="h-5 overflow-hidden rounded border border-stone-700 bg-stone-900">
+              <div id="dummyHpBar" class="h-full w-full bg-gradient-to-r from-red-600 via-amber-500 to-lime-400 transition-all duration-300"></div>
+            </div>
+          </section>
+
+          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5">
+            <h2 class="text-xl font-bold text-white">Method Call Result</h2>
+            <div class="mt-4 grid gap-3 text-sm">
+              <div class="rounded border border-stone-800 bg-stone-950 p-3">
+                <div class="text-xs font-bold uppercase tracking-[0.16em] text-stone-500">Selected Class</div>
+                <div id="selectedClass" class="mt-1 font-mono text-lime-300">None</div>
+              </div>
+              <div class="rounded border border-stone-800 bg-stone-950 p-3">
+                <div class="text-xs font-bold uppercase tracking-[0.16em] text-stone-500">Called Method</div>
+                <div id="calledMethod" class="mt-1 font-mono text-lime-300">None</div>
+              </div>
+              <div class="rounded border border-stone-800 bg-stone-950 p-3">
+                <div class="text-xs font-bold uppercase tracking-[0.16em] text-stone-500">Result Message</div>
+                <div id="resultMessage" class="mt-1 leading-6 text-stone-200">Click a subclass card to run attack(target).</div>
+              </div>
+              <div class="rounded border border-stone-800 bg-stone-950 p-3">
+                <div class="text-xs font-bold uppercase tracking-[0.16em] text-stone-500">Training Dummy Current HP</div>
+                <div id="dummyCurrentHp" class="mt-1 font-mono text-lime-300">999</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="rounded-lg border border-lime-800/70 bg-lime-950/15 p-4 shadow-2xl shadow-black/30 sm:p-5">
+            <h2 class="text-xl font-bold text-white">Why This Is Polymorphism</h2>
+            <p class="mt-3 text-sm leading-6 text-stone-300">
+              Every clickable object is treated as a Character, but each subclass responds to the same
+              <span class="font-mono text-lime-300">attack(target)</span> message differently. The common method name
+              produces different behavior depending on the real object type.
+            </p>
+          </section>
+
+          <section class="rounded-lg border border-stone-700/80 bg-zinc-950/90 p-4 shadow-2xl shadow-black/30 sm:p-5">
+            <h2 class="text-xl font-bold text-white">Click Log</h2>
+            <ol id="clickLog" class="mt-4 max-h-56 space-y-2 overflow-auto pr-1 text-sm text-stone-300"></ol>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // CharacterADT plays the role of an abstract class.
+    // JavaScript does not have Python's ABC module, so this class blocks direct construction
+    // and defines methods that subclasses are expected to implement.
+    class CharacterADT {
+      constructor(name, hp) {
+        if (new.target === CharacterADT) {
+          throw new Error("CharacterADT is abstract and cannot be instantiated directly.");
+        }
+        this.name = name;
+        this.hp = hp;
+      }
+
+      attack(target) {
+        throw new Error("attack(target) must be implemented by a subclass.");
+      }
+
+      takeDamage(damage) {
+        throw new Error("takeDamage(damage) must be implemented by a subclass.");
+      }
+    }
+
+    // Character is the base class for Player, monsters, and TrainingDummy.
+    // It contains shared state and common behavior inherited by subclasses.
+    class Character extends CharacterADT {
+      constructor(name, hp, attackPower) {
+        super(name, hp);
+        this.maxHp = hp;
+        this.attackPower = attackPower;
+      }
+
+      attack(target) {
+        const damage = this.attackPower;
+        target.takeDamage(damage);
+        return `${this.name} attacks ${target.name} for ${damage} damage.`;
+      }
+
+      takeDamage(damage) {
+        this.hp = Math.max(0, this.hp - damage);
+        return `${this.name} takes ${damage} damage. HP: ${this.hp}/${this.maxHp}`;
+      }
+
+      heal(amount) {
+        const before = this.hp;
+        this.hp = Math.min(this.maxHp, this.hp + amount);
+        return `${this.name} heals ${this.hp - before} HP.`;
+      }
+
+      isAlive() {
+        return this.hp > 0;
+      }
+    }
+
+    class Item {
+      constructor(name) {
+        this.name = name;
+      }
+    }
+
+    // This is inheritance: Weapon extends Item and reuses Item's name field.
+    class Weapon extends Item {
+      constructor(name, bonusAttack) {
+        super(name);
+        this.bonusAttack = bonusAttack;
+      }
+    }
+
+    // This is inheritance: HealingItem extends Item and adds healAmount.
+    class HealingItem extends Item {
+      constructor(name, healAmount) {
+        super(name);
+        this.healAmount = healAmount;
+      }
+    }
+
+    // This is inheritance: Player extends Character.
+    class Player extends Character {
+      constructor(name) {
+        super(name, 140, 12);
+        this.inventory = {};
+        this.itemData = {};
+        this.weapon = new Weapon("Bare Hands", 0);
+        this.scrap = 0;
+      }
+
+      // Method overriding: Player replaces Character.attack with player-specific behavior.
+      attack(target) {
+        const damage = this.attackPower + this.weapon.bonusAttack + 5;
+        target.takeDamage(damage);
+        return `${this.name} swings a scavenged blade and deals ${damage} damage to ${target.name}.`;
+      }
+    }
+
+    class NormalMonster extends Character {
+      constructor(name) {
+        super(name, 70, 9);
+        this.reward = 10;
+      }
+
+      // Method overriding: NormalMonster has its own attack result.
+      attack(target) {
+        const damage = this.attackPower;
+        target.takeDamage(damage);
+        return `${this.name} claws forward and deals ${damage} damage. Reward value: ${this.reward} scrap.`;
+      }
+    }
+
+    class EliteMonster extends Character {
+      constructor(name) {
+        super(name, 100, 15);
+        this.reward = 20;
+      }
+
+      // Method overriding: EliteMonster changes the attack damage and message.
+      attack(target) {
+        const damage = this.attackPower + 4;
+        target.takeDamage(damage);
+        return `${this.name} performs an elite strike for ${damage} damage. Reward value: ${this.reward} scrap.`;
+      }
+    }
+
+    class BossMonster extends Character {
+      constructor(name) {
+        super(name, 180, 24);
+        this.reward = 35;
+      }
+
+      // Method overriding: BossMonster provides a stronger boss-specific attack.
+      attack(target) {
+        const damage = this.attackPower + 10;
+        target.takeDamage(damage);
+        return `${this.name} crushes the arena with a boss attack for ${damage} damage. Reward value: ${this.reward} scrap.`;
+      }
+    }
+
+    class TrainingDummy extends Character {
+      constructor(name) {
+        super(name, 999, 0);
+      }
+
+      // Method overriding: TrainingDummy can receive the same attack call but does not damage others.
+      attack(target) {
+        return `${this.name} cannot fight back. This override demonstrates a harmless attack implementation.`;
+      }
+
+      // Method overriding: TrainingDummy customizes how damage is handled for the visual HP bar.
+      takeDamage(damage) {
+        this.hp = Math.max(0, this.hp - damage);
+        return `${this.name} absorbs ${damage} damage. HP: ${this.hp}/${this.maxHp}`;
+      }
+    }
+
+    class Game {
+      constructor() {
+        this.player = new Player("Scraper");
+        this.trainingDummy = new TrainingDummy("Training Dummy");
+        this.monsters = [
+          new NormalMonster("Normal Monster"),
+          new EliteMonster("Elite Monster"),
+          new BossMonster("Boss Monster")
+        ];
+        this.items = [
+          new Weapon("Scrap Cutter", 8),
+          new HealingItem("Med Kit", 30)
+        ];
+      }
+
+      resetDummy() {
+        this.trainingDummy.hp = this.trainingDummy.maxHp;
+      }
+    }
+
+    const game = new Game();
+    const actors = {
+      Player: game.player,
+      NormalMonster: game.monsters[0],
+      EliteMonster: game.monsters[1],
+      BossMonster: game.monsters[2],
+      TrainingDummy: game.trainingDummy
+    };
+
+    const selectedClass = document.querySelector("#selectedClass");
+    const calledMethod = document.querySelector("#calledMethod");
+    const resultMessage = document.querySelector("#resultMessage");
+    const dummyCurrentHp = document.querySelector("#dummyCurrentHp");
+    const dummyHpText = document.querySelector("#dummyHpText");
+    const dummyHpBar = document.querySelector("#dummyHpBar");
+    const clickLog = document.querySelector("#clickLog");
+    const cards = document.querySelectorAll(".interactive-card");
+    const resetButton = document.querySelector("#resetButton");
+    let logCount = 0;
+
+    function updateDummyHp() {
+      const dummy = game.trainingDummy;
+      const percentage = (dummy.hp / dummy.maxHp) * 100;
+      dummyHpText.textContent = `${dummy.hp} / ${dummy.maxHp}`;
+      dummyCurrentHp.textContent = dummy.hp;
+      dummyHpBar.style.width = `${percentage}%`;
+    }
+
+    function appendLog(className) {
+      logCount += 1;
+      const entry = document.createElement("li");
+      entry.className = "rounded border border-stone-800 bg-stone-950 px-3 py-2 font-mono text-xs";
+      entry.textContent = `${logCount}. ${className}.attack(target) called`;
+      clickLog.prepend(entry);
+    }
+
+    function setActiveCard(className) {
+      cards.forEach((card) => {
+        card.classList.toggle("active", card.dataset.class === className);
+      });
+    }
+
+    // This click handler is the polymorphism demo.
+    // Each actor is accessed through the same attack(target) method call,
+    // but JavaScript dispatches to the overridden method of the actual class.
+    function runAttack(className) {
+      const actor = actors[className];
+      const target = game.trainingDummy;
+      const message = actor.attack(target);
+
+      selectedClass.textContent = className;
+      calledMethod.textContent = `${className}.attack(target)`;
+      resultMessage.textContent = message;
+      updateDummyHp();
+      appendLog(className);
+      setActiveCard(className);
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => runAttack(card.dataset.class));
+    });
+
+    resetButton.addEventListener("click", () => {
+      game.resetDummy();
+      selectedClass.textContent = "Game";
+      calledMethod.textContent = "Game.resetDummy()";
+      resultMessage.textContent = "Training Dummy HP was reset to 999.";
+      updateDummyHp();
+      setActiveCard("");
+    });
+
+    updateDummyHp();
+  </script>
+</body>
+</html>
