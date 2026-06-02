@@ -78,5 +78,5 @@ https://github.com/mrkai1228/CS-Assignment-2
 Vercel URL:
 
 ```text
-Paste Vercel deployment URL here
+cs-assignment-2.vercel.app
 ```
