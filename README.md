@@ -72,7 +72,7 @@ No backend server or Python execution is required.
 GitHub Repository URL:
 
 ```text
-Paste GitHub repository URL here
+https://github.com/mrkai1228/CS-Assignment-2
 ```
 
 Vercel URL:
